@@ -1,6 +1,7 @@
 ﻿using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using StardewValley.Buildings;
 
 namespace AutoFillPetBowl
 {
@@ -13,8 +14,11 @@ namespace AutoFillPetBowl
 
         private static void FillBowl(object? sender, DayStartedEventArgs e)
         {
-            var pet = Game1.player?.getPet();
-            pet?.GetPetBowl()?.watered.Set(true);
+            foreach (var building in Game1.getFarm().buildings)
+            {
+                if (building is not PetBowl bowl) continue;
+                bowl.watered.Set(true);
+            }
         }
     }
 }

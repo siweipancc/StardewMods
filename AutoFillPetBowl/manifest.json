@@ -1,7 +1,7 @@
 {
   "Name": "AutoFillPetBowl",
   "Author": "Siweipancc",
-  "Version": "0.0.2",
+  "Version": "0.0.3",
   "Description": "Auto fill pet's bowl.",
   "UniqueID": "Siweipancc.AutoFillPetBowl",
   "EntryDll": "AutoFillPetBowl.dll",
