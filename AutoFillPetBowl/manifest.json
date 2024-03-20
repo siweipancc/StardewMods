@@ -5,5 +5,6 @@
   "Description": "Auto fill pet's bowl.",
   "UniqueID": "Siweipancc.AutoFillPetBowl",
   "EntryDll": "AutoFillPetBowl.dll",
-  "UpdateKeys": []
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": ["Nexus:20667"]
 }
