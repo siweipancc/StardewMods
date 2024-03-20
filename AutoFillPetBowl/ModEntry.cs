@@ -13,7 +13,7 @@ namespace AutoFillPetBowl
 
         private static void FillBowl(object? sender, DayStartedEventArgs e)
         {
-            var pet = Game1.MasterPlayer.getPet();
+            var pet = Game1.player?.getPet();
             pet?.GetPetBowl()?.watered.Set(true);
         }
     }
