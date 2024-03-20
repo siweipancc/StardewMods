@@ -1,5 +1,5 @@
 ﻿## Description
-At the start of everyday, it fills your pet's bowl.
+At the start of every day, it fills your pet's bowl.
 
 ## Install
 1. [Install the latest version of SMAPI](https://smapi.io/).
