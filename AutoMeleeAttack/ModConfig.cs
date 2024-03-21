@@ -10,5 +10,5 @@ public sealed class ModConfig
 
     public SButton Toggle { get; set; } = SButton.Q;
 
-    public SortedDictionary<string, bool>? SkipAlso { get; set; }
+    public SortedDictionary<string, bool>? SkipAlso { get; set; } = new();
 }

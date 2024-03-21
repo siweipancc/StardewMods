@@ -7,5 +7,6 @@
   "config.Toggle.tooltip": "切换热键, 你可以在游戏中随时开启或者关闭自动攻击.",
   "message.toggle.enable": "自动攻击已开启",
   "message.toggle.disabled": "自动攻击已关闭",
-  "config.section.also.title": "还包括下边的(忽略)"
+  "config.section.also.title": "还包括下边的(忽略)",
+  "message.target.missed": "已忽略的目标"
 }

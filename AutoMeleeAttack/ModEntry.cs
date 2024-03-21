@@ -13,13 +13,15 @@ public class ModEntry : Mod
 
 
 {
-    private readonly HashSet<string> _ignores = new();
+    // key: name, value : i18n
+    private static readonly SortedDictionary<string, string> LocalizedMonsterNames = new();
+
+    private static readonly HashSet<string> Ignores = new();
 
     private ModConfig? _config;
 
     private bool _enable = true;
     private Monster? _lastSkipMonster;
-
 
     public override void Entry(IModHelper helper)
     {
@@ -35,16 +37,20 @@ public class ModEntry : Mod
                 LogLevel.Info);
         }
 
-        InvokeDicts();
-        helper.Events.GameLoop.GameLaunched += RegisterGenericModConfigMenu;
-        InitIgnores();
-
+        helper.Events.Content.LocaleChanged += OnLocaleChange;
+        helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         helper.Events.Input.ButtonReleased += ToggleOnButtonReleased;
         helper.Events.GameLoop.UpdateTicking += OnUpdateTicking;
     }
 
+
     private void ToggleOnButtonReleased(object? sender, ButtonReleasedEventArgs buttonReleasedEventArgs)
     {
+        if (!Context.IsWorldReady)
+        {
+            return;
+        }
+
         if (buttonReleasedEventArgs.Button != _config!.Toggle)
         {
             return;
@@ -63,7 +69,7 @@ public class ModEntry : Mod
 
     private void InitIgnores()
     {
-        _ignores.Clear();
+        Ignores.Clear();
         foreach (var (monster, value) in _config!.SkipAlso!)
         {
             if (!value)
@@ -71,10 +77,10 @@ public class ModEntry : Mod
                 continue;
             }
 
-            _ignores.Add(monster);
+            Ignores.Add(monster);
         }
 
-        string join = string.Join(", ", _ignores);
+        string join = string.Join(", ", Ignores);
         Monitor.Log($"ignore these monsters: {join}", LogLevel.Info);
     }
 
@@ -105,11 +111,12 @@ public class ModEntry : Mod
             return;
         }
 
-        if (_ignores.Contains(monster.Name))
+        if (Ignores.Contains(monster.Name))
         {
             if (_lastSkipMonster != monster)
             {
-                Game1.addHUDMessage(new HUDMessage($"skip attacking monster: {monster.Name}",
+                Game1.addHUDMessage(new HUDMessage(
+                    $"{I18n.Message_Target_Missed()} : {LocalizedMonsterNames[monster.Name]}",
                     HUDMessage.newQuest_type));
             }
 
@@ -158,16 +165,20 @@ public class ModEntry : Mod
             (int)player.GetToolLocation(true).Y, player);
     }
 
-    private void RegisterGenericModConfigMenu(object? sender, GameLaunchedEventArgs gameLaunchedEventArgs)
+    private IGenericModConfigMenuApi? GetConfigApi()
     {
-        IGenericModConfigMenuApi? configMenu =
-            Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
+        return Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
+    }
+
+    private void RegisterGenericModConfigMenu()
+    {
+        IGenericModConfigMenuApi? configMenu = GetConfigApi();
         if (configMenu == null)
         {
             return;
         }
 
-
+        configMenu.Unregister(ModManifest);
         // register mod
         configMenu.Register(
             mod: ModManifest,
@@ -210,10 +221,11 @@ public class ModEntry : Mod
         );
         configMenu.AddSectionTitle(mod: ModManifest, I18n.Config_Section_Also_Title);
 
+
         foreach (var (monsterName, _) in _config!.SkipAlso!)
         {
             configMenu.AddBoolOption(mod: ModManifest,
-                name: () => monsterName,
+                name: () => LocalizedMonsterNames[monsterName],
                 getValue: () => _config.SkipAlso[monsterName],
                 setValue: value => { _config.SkipAlso[monsterName] = value; }
             );
@@ -221,24 +233,45 @@ public class ModEntry : Mod
     }
 
 
-    private void InvokeDicts()
+    private void ForceReloadLocalizedMonsterNames()
     {
-        // var languageString = LocalizedContentManager.CurrentLanguageString;
-        Dictionary<string, string> monsters = DataLoader.Monsters(Game1.content);
-        foreach (var (name, _) in monsters)
+        Dictionary<string, string> dictionary = Helper.GameContent.Load<Dictionary<string, string>>("Data\\Monsters");
+        foreach (var (key, value) in dictionary)
+        {
+            string localizedText = value.Split('/')[14];
+            LocalizedMonsterNames[key] = localizedText;
+        }
+    }
+
+
+    private void OnGameLaunched(object? sender, GameLaunchedEventArgs args)
+    {
+        ForceReloadLocalizedMonsterNames();
+        // try add
+        foreach (var name in LocalizedMonsterNames.Keys)
         {
             _config!.SkipAlso!.TryAdd(name, false);
         }
 
-        if (monsters.Count == _config!.SkipAlso!.Count)
+        InitIgnores();
+
+        if (LocalizedMonsterNames.Count != _config!.SkipAlso!.Count)
         {
-            return;
+            Monitor.Log("monsters count not consists, delete invalid(possible) opts");
+            foreach (var key in _config!.SkipAlso.Keys.Where(key => !LocalizedMonsterNames.ContainsKey(key)))
+            {
+                _config!.SkipAlso.Remove(key);
+            }
         }
 
-        Monitor.Log("monsters count not consists, delete invalid(possible) opts");
-        foreach (var key in _config!.SkipAlso.Keys.Where(key => !monsters.ContainsKey(key)))
+        RegisterGenericModConfigMenu();
+    }
+
+    private void OnLocaleChange(object? sender, LocaleChangedEventArgs args)
+    {
+        if (args.OldLanguage != args.NewLanguage)
         {
-            _config!.SkipAlso.Remove(key);
+            ForceReloadLocalizedMonsterNames();
         }
     }
 }
