@@ -3,6 +3,7 @@ using StardewValley;
 using StardewValley.Locations;
 
 namespace MoreEvents.Events.Commands;
+using static Logger;
 
 public class FarmCaveCommands
 {
@@ -28,7 +29,7 @@ public class FarmCaveCommands
                 context.LogErrorAndSkip("必须在洞穴事件后");
                 break;
         }
-
+        Debug("FarmCaveUpgrade success!");
         ++@event.CurrentCommand;
     }
 }
