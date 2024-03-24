@@ -5,7 +5,7 @@
       "Action": "EditData",
       "Target": "Data/Events/Farm",
       "Entries": {
-        "Siweipancc.OnlyChildMakeChoices/m 50000/t 600 1200/H/Siweipancc.FarmCaveFirstComplete": "continue/65 15/farmer 64 16 2 Demetrius 64 18 0/pause 1500/speak Demetrius \"{{i18n: notChild}}\"/farmerEat 254/speak Demetrius \"{{i18n: ops}}\"/speak Demetrius \"{{i18n: myTech}}\"/Siweipancc.FarmCaveUpgrade/end"
+        "Siweipancc.OnlyChildMakeChoices/m 50000/t 600 1200/H/Siweipancc.FarmCaveFirstComplete": "continue/65 15/farmer 64 16 2 Demetrius 64 18 0/pause 1500/speak Demetrius \"{{i18n: notChild}}\"/farmerEat 254/speak Demetrius \"{{i18n: ops}}\"/speak Demetrius \"{{i18n: myTech}}\"/Siweipancc.FarmCaveUpgrade/speak Demetrius \"bye\"/end"
       }
     }
   ]
