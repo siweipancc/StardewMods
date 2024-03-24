@@ -5,8 +5,13 @@
   "Description": "Upgrade you FarmCave.",
   "UniqueID": "Siweipancc.OnlyChildMakeChoices",
   "MinimumApiVersion": "4.0.0",
-  "UpdateKeys": [],
+  "UpdateKeys": ["Nexus:20947"],
   "ContentPackFor": {
     "UniqueID": "Pathoschild.ContentPatcher"
-  }
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "Siweipancc.MoreEvents"
+    }
+  ]
 }
