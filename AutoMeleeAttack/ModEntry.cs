@@ -1,5 +1,4 @@
 ﻿using GenericModConfigMenu;
-using Microsoft.Xna.Framework;
 using Netcode;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
@@ -16,7 +15,7 @@ public class ModEntry : Mod
     // key: name, value : i18n
     private static readonly SortedDictionary<string, string> LocalizedMonsterNames = new();
 
-    private static readonly HashSet<string> Ignores = new();
+    private readonly HashSet<string> _ignores = new();
 
     private ModConfig? _config;
 
@@ -43,7 +42,6 @@ public class ModEntry : Mod
         helper.Events.GameLoop.UpdateTicking += OnUpdateTicking;
     }
 
-
     private void ToggleOnButtonReleased(object? sender, ButtonReleasedEventArgs buttonReleasedEventArgs)
     {
         if (!Context.IsWorldReady)
@@ -69,7 +67,7 @@ public class ModEntry : Mod
 
     private void InitIgnores()
     {
-        Ignores.Clear();
+        _ignores.Clear();
         foreach (var (monster, value) in _config!.SkipAlso!)
         {
             if (!value)
@@ -77,10 +75,15 @@ public class ModEntry : Mod
                 continue;
             }
 
-            Ignores.Add(monster);
+            _ignores.Add(monster);
         }
 
-        string join = string.Join(", ", Ignores);
+        if (_ignores.Count <= 0)
+        {
+            return;
+        }
+
+        string join = string.Join(", ", _ignores);
         Monitor.Log($"ignore these monsters: {join}", LogLevel.Info);
     }
 
@@ -88,6 +91,11 @@ public class ModEntry : Mod
     private void OnUpdateTicking(object? sender, UpdateTickingEventArgs e)
     {
         if (!Context.IsWorldReady || !_enable)
+        {
+            return;
+        }
+
+        if (!e.IsMultipleOf(10))
         {
             return;
         }
@@ -111,7 +119,7 @@ public class ModEntry : Mod
             return;
         }
 
-        if (Ignores.Contains(monster.Name))
+        if (_ignores.Count > 0 && _ignores.Contains(monster.Name))
         {
             if (_lastSkipMonster != monster)
             {
@@ -139,29 +147,11 @@ public class ModEntry : Mod
         }
 
         int towards = player.getGeneralDirectionTowards(monster.Position);
-        if (player.FacingDirection == towards)
+        if (player.FacingDirection != towards)
         {
-            return;
+            player.faceDirection(towards);
         }
-
-        player.FacingDirection = towards;
-        switch (towards)
-        {
-            case 0:
-                player.FarmerSprite.animate(48, new GameTime());
-                break;
-            case 1:
-                player.FarmerSprite.animate(40, new GameTime());
-                break;
-            case 2:
-                player.FarmerSprite.animate(32, new GameTime());
-                break;
-            case 3:
-                player.FarmerSprite.animate(56, new GameTime());
-                break;
-        }
-
-        player.CurrentTool.beginUsing(currentLocation, (int)player.GetToolLocation(true).X,
+        playerCurrentTool.beginUsing(currentLocation, (int)player.GetToolLocation(true).X,
             (int)player.GetToolLocation(true).Y, player);
     }
 
