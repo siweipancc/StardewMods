@@ -120,19 +120,6 @@
           "CustomFields": null
         }
       }
-    },
-    {
-      "Action": "EditData",
-      "Target": "Data/Machines",
-      "Fields": "ExperienceGainOnHarvest",
-      "Entries": {
-        "(BC){{ModId}}_FiberMachine": {
-          "ExperienceGainOnHarvest": "Foraging 1"
-        }
-      },
-      "when": {
-        "Experience_FiberMachine": "true"
-      }
     }
   ]
 }

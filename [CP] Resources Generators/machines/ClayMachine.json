@@ -201,19 +201,6 @@
           "CustomFields": null
         }
       }
-    },
-    {
-      "Action": "EditData",
-      "Target": "Data/Machines",
-      "Fields": "ExperienceGainOnHarvest",
-      "Entries": {
-        "(BC){{ModId}}_ClayMachine": {
-          "ExperienceGainOnHarvest": "Farming 1"
-        }
-      },
-      "when": {
-        "Experience_ClayMachine": "true"
-      }
     }
   ]
 }

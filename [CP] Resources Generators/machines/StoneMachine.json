@@ -230,19 +230,6 @@
           "CustomFields": null
         }
       }
-    },
-    {
-      "Action": "EditData",
-      "Target": "Data/Machines",
-      "Fields": "ExperienceGainOnHarvest",
-      "Entries": {
-        "(BC){{ModId}}_StoneMachine": {
-          "ExperienceGainOnHarvest": "Mining 1"
-        }
-      },
-      "when": {
-        "Experience_StoneMachine": "true"
-      }
     }
   ]
 }

@@ -1,18 +1,7 @@
 {
-  "config.section.Experience.name": "经验值",
-  "config.section.Experience.description": "从机器获得经验值",
-
-  "config.Experience_ClayMachine.name": "钻泥机",
-  "config.Experience_ClayMachine.description": "从机器获得经验值",
-  "config.Experience_FiberMachine.name": "纤维机",
-  "config.Experience_FiberMachine.description": "从机器获得经验值",
-  "config.Experience_StoneMachine.name": "钻石机",
-  "config.Experience_StoneMachine.description": "从机器获得经验值",
-  "config.Experience_WoodMachine.name": "制木机",
-  "config.Experience_WoodMachine.description": "从机器获得经验值",
-
   "config.section.Recipes.name": "制造难度",
   "config.section.Recipes.description": "制造难度",
+
   "config.Recipes_Requirement_ClayMachine.name": "钻泥机",
   "config.Recipes_Requirement_ClayMachine.values.harder": "困难",
   "config.Recipes_Requirement_ClayMachine.values.normal": "正常",

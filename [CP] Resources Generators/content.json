@@ -1,26 +1,6 @@
 {
   "Format": "2.0.0",
   "ConfigSchema": {
-    "Experience_WoodMachine": {
-      "AllowValues": "true, false",
-      "Default": "false",
-      "Section": "Experience"
-    },
-    "Experience_StoneMachine": {
-      "AllowValues": "true, false",
-      "Default": "false",
-      "Section": "Experience"
-    },
-    "Experience_ClayMachine": {
-      "AllowValues": "true, false",
-      "Default": "false",
-      "Section": "Experience"
-    },
-    "Experience_FiberMachine": {
-      "AllowValues": "true, false",
-      "Default": "false",
-      "Section": "Experience"
-    },
     "Recipes_Requirement_WoodMachine": {
       "AllowValues": "harder, normal, easier",
       "Default": "normal",

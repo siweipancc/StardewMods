@@ -1,16 +1,4 @@
 {
-  "config.section.Experience.name": "Experience",
-  "config.section.Experience.description": "Gain Experience from machines",
-
-  "config.Experience_ClayMachine.name": "Clay machines",
-  "config.Experience_ClayMachine.description": "Gain Experience from machines",
-  "config.Experience_FiberMachine.name": "Fiber machines",
-  "config.Experience_FiberMachine.description": "Gain Experience from machines",
-  "config.Experience_StoneMachine.name": "Stone machines",
-  "config.Experience_StoneMachine.description": "Gain Experience from machines",
-  "config.Experience_WoodMachine.name": "Wood machines",
-  "config.Experience_WoodMachine.description": "Gain Experience from machines",
-
   "config.section.Recipes.name": "Recipes Require",
   "config.section.Recipes.description": "Recipes Require level",
 
