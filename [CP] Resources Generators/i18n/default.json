@@ -39,7 +39,8 @@
   "Description.ClayMachine": "Generate Clay",
   "DisplayName.FiberMachine": "Fiber Machine",
   "Description.FiberMachine": "Generate Fiber",
-  "DisplayName.StoneMachine": "Generate Stone",
+  "DisplayName.StoneMachine": "Stone Machine",
+  "Description.StoneMachine": "Generate Fiber",
   "DisplayName.WoodMachine": "Wood Machine",
   "Description.WoodMachine": "Generate Wood"
 }
