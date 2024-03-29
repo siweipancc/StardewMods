@@ -1,0 +1,11 @@
+{
+  "Experience_WoodMachine": "false",
+  "Experience_StoneMachine": "false",
+  "Experience_ClayMachine": "false",
+  "Experience_FiberMachine": "false",
+  "Recipes_Requirement_WoodMachine": "easier",
+  "Recipes_Requirement_StoneMachine": "easier",
+  "Recipes_Requirement_ClayMachine": "easier",
+  "Recipes_Requirement_FiberMachine": "easier",
+  "Generate_Rate_Minutes": "360"
+}

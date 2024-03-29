@@ -69,3 +69,7 @@ iOSInjectionProject/
 obj/
 bin/
 .idea/
+.vs/
+*.sln.DotSettings.user
+
+release/
