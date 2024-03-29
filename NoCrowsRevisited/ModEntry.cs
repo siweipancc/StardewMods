@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewValley;
-// ReSharper disable InconsistentNaming
 
 namespace NoCrowsRevisited;
 
@@ -17,31 +15,53 @@ public class ModEntry : Mod
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
     }
 
-    private static void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
+    private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
     {
         var harmony = new Harmony("Siweipancc.NoCrowsRevisited");
+        Type type;
+        try
+        {
+            type = GetRunTimeType("Farm");
+        }
+        catch (Exception exception)
+        {
+            Monitor.Log(exception.Message, LogLevel.Error);
+            throw;
+        }
+
         harmony.Patch(
-            AccessTools.Method(typeof(Farm), "addCrows"),
-            new HarmonyMethod(typeof(FarmPatch), "addCrows"));
+            AccessTools.Method(type, "addCrows"),
+            new HarmonyMethod(typeof(FarmPatch), nameof(FarmPatch.addCrows)));
         harmony.Patch(
-            AccessTools.Method(typeof(Farm), "doSpawnCrow", new[] { typeof(Vector2) }),
-            new HarmonyMethod(typeof(FarmPatch), "doSpawnCrow"));
+            AccessTools.Method(type, "doSpawnCrow", new[] { typeof(Vector2) }),
+            new HarmonyMethod(typeof(FarmPatch), nameof(FarmPatch.doSpawnCrow)));
     }
 
 
+    private static Type GetRunTimeType(string subPath)
+    {
+        Type? type = Type.GetType($"StardewValley.{subPath}, Stardew Valley");
+        if (type == null)
+        {
+            type = Type.GetType($"StardewValley.{subPath}, StardewValley");
+        }
+
+        return type ?? throw new SystemException($"cannot find type: {subPath}");
+    }
+
     private static class FarmPatch
     {
-        // ReSharper disable once UnusedMember.Local
-        public static bool addCrows(Farm __instance)
+        // ReSharper disable once InconsistentNaming
+        public static bool addCrows()
         {
-            _modMonitor?.Log($"skip addCrows in farm :{__instance.DisplayName}");
+            _modMonitor?.Log("skip addCrows in farm");
             return false;
         }
 
-        // ReSharper disable once UnusedMember.Local
-        public static bool doSpawnCrow(GameLocation __instance, Vector2 __0)
+        // ReSharper disable once InconsistentNaming
+        public static bool doSpawnCrow()
         {
-            _modMonitor?.Log($"skip doSpawnCrow in farm :{__instance.DisplayName} in position: {__0.X}:{__0.Y}");
+            _modMonitor?.Log("skip doSpawnCrow in farm");
             return false;
         }
     }
