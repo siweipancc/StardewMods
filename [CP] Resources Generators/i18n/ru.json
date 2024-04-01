@@ -1,0 +1,34 @@
+{
+  "config.section.Recipes.name": "Сложность рецепта",
+  "config.section.Recipes.description": "Требования для создания машин",
+
+  "config.Recipes_Requirement_ClayMachine.name": "Генератор глины",
+  "config.Recipes_Requirement_ClayMachine.values.harder": "Тяжело",
+  "config.Recipes_Requirement_ClayMachine.values.normal": "Нормально",
+  "config.Recipes_Requirement_ClayMachine.values.easier": "Легко",
+  "config.Recipes_Requirement_FiberMachine.name": "Генератор волокна",
+  "config.Recipes_Requirement_FiberMachine.values.harder": "Тяжело",
+  "config.Recipes_Requirement_FiberMachine.values.normal": "Нормально",
+  "config.Recipes_Requirement_FiberMachine.values.easier": "Легко",
+  "config.Recipes_Requirement_StoneMachine.name": "Генератор волокна",
+  "config.Recipes_Requirement_StoneMachine.values.harder": "Тяжело",
+  "config.Recipes_Requirement_StoneMachine.values.normal": "Нормально",
+  "config.Recipes_Requirement_StoneMachine.values.easier": "Легко",
+  "config.Recipes_Requirement_WoodMachine.name": "Генератор дерева",
+  "config.Recipes_Requirement_WoodMachine.values.harder": "Тяжело",
+  "config.Recipes_Requirement_WoodMachine.values.normal": "Нормально",
+  "config.Recipes_Requirement_WoodMachine.values.easier": "Легко",
+
+  "config.section.GenerateRate.name": "Скорость генераторов",
+  "config.section.GenerateRate.description": "в минутах",
+  "config.Generate_Rate_Minutes.name": "Скорость генераторов в минутах",
+
+  "DisplayName.ClayMachine": "Генератор глины",
+  "Description.ClayMachine": "Создаёт глину",
+  "DisplayName.FiberMachine": "Генератор волокна",
+  "Description.FiberMachine": "Создаёт волокно",
+  "DisplayName.StoneMachine": "Генератор камня",
+  "Description.StoneMachine": "Создаёт камень",
+  "DisplayName.WoodMachine": "Генератор дерева",
+  "Description.WoodMachine": "Создаёт дерево"
+}
