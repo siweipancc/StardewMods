@@ -1,5 +1,5 @@
 ﻿# [CP] Resources Generators
-
+[中文](Readme_zh.md)
 
 ![screenshots1.png](screenshots1.png)
 

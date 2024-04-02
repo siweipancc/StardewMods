@@ -1,5 +1,7 @@
 ﻿# [CP] Resources Generators
 
+[English](Readme.md)
+
 ## Description
 
 大型可制造器械, 自动化生产基础物料: 泥土, 纤维, 石头, 木头等.
@@ -28,7 +30,6 @@
 4. 006% \[MixedFlowerSeeds] Mixed Flower Seeds // 混合花卉种子\(游戏时间一个月之后)
 5. 008% \[Moss] Moss // 苔藓\(绿雨事件之后)
 6. 001% \[MossySeed] Mossy Seed // 苔藓种\(绿雨事件之后)
-
 
 ### 石头机
 
