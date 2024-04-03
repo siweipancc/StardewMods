@@ -18,6 +18,7 @@ public class FarmCaveCommands
             // 水果 + 蘑菇
             case 1:
                 Game1.RequireLocation<FarmCave>("FarmCave").setUpMushroomHouse();
+                ++@event.CurrentCommand;
                 break;
             // 蘑菇 + 水果
             case 2:
